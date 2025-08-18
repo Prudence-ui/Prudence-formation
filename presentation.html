@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <html lang="fr">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+          <title>Paiement - Accès à la formation</title>
+          <style>
+            body, html {
+              height: 100%;
+              margin: 0;
+              background-color: #001f3f; color: white;
+
+            }
+        
+            .container {
+              display: flex;
+              justify-content: center;  /* Centre horizontalement */
+              align-items: center;      /* Centre verticalement */
+              height: 60vh;            /* Hauteur de la fenêtre */
+              background-color: #001f3f; 
+            }
+
+              
+
+            video {
+             width: 640px;
+             height: auto;
+            }
+
+            .centered {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  height: 10vh
+                  
+           }
+
+
+           .btn-pay {
+            background-color: #0b84ff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            }
+            .btn-pay:hover {
+                background-color: #086cd6;
+            }
+        
+     </style>
+
+       <script src="https://cdn.fedapay.com/checkout.js"></script>
+
+ </head>
+    <body>
+
+      <header>
+
+       
+
+        <div class="centered">
+
+           <h3>REGARDE ABSOLUMENT CETTE VIDEO 👇</h3>
+
+        </div>
+
+
+        <p>_</p>
+       
+  
+          <div class="container">
+              <video controls>
+                <source src="./assets/videos/ma_presentation.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo.
+              </video>
+          </div>
+
+      
+
+      </header>
+
+         
+
+         
+
+     <!-- Bouton payer -->
+
+      <div class="centered">
+
+            <button class="btn-pay" id="btn-payer">Le prendre maintenant</button>
+
+
+
+      </div>
+
+    <!-- Script Kkiapay -->
+    <script src="https://cdn.kkiapay.me/k.js"></script>
+    <script>
+        const PUBLIC_KEY = "4a4b987d7db09a83dadbc72380c47939c21cdc97"; // 🔹 Remplacez par votre clé publique Kkiapay
+        const AMOUNT = 100; // 🔹 Montant en XOF
+        const REDIRECT_URL = "formation.html"; // 🔹 Page où rediriger après paiement
+
+        document.getElementById('btn-payer').addEventListener('click', () => {
+            openKkiapayWidget({
+                amount: AMOUNT,
+                position: "center",
+                key: PUBLIC_KEY,
+                paymentmethod: "both", // "card", "momo" ou "both"
+            });
+        });
+
+        // Événement succès : redirection
+        addSuccessListener(response => {
+            console.log("Paiement réussi :", response);
+            window.location.href = REDIRECT_URL;
+        });
+
+        // Événement échec (optionnel)
+        addFailureListener(error => {
+            console.error("Paiement échoué :", error);
+            alert("Le paiement a échoué. Veuillez réessayer.");
+        });
+    </script>
+
+          
+  
+
+
+  </body>
+    
+
+</html>
